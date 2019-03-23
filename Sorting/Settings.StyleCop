@@ -1,0 +1,5 @@
+<StyleCopSettings Version="105">
+  <GlobalSettings>
+    <StringProperty Name="LinkedSettingsFile">..\..\..\..\..\Users\Marina\source\repos\ClassLibrary1\ClassLibrary1\Settings.StyleCop</StringProperty>
+  </GlobalSettings>
+</StyleCopSettings>
