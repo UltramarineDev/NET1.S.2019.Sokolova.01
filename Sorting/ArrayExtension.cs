@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Sorting
 {
@@ -248,6 +249,42 @@ namespace Sorting
 
             return null;
         }
-       #endregion
+        #endregion
+        #region NET.S.2019.Sokolova.02 - task 4
+        /// <summary>
+        /// Method filters input array by removing elements without input digit
+        /// </summary>
+        /// <param name="array">input array of integers</param>
+        /// <param name="key">integer digit</param>
+        public static int[] FilterArrayByKey(int[] array, int key)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException(nameof(array), "Source array can not be null.");
+            }
+
+            if (array.Length == 0)
+            {
+                throw new ArgumentException("Source array can not be empty.", nameof(array));
+            }
+
+            if (key > 9 || key < 0)
+            {
+                throw new ArgumentException(" Input number is not a digit.", nameof(key));
+            }
+
+            List<int> resultValuesList = new List<int>();
+            for (int i = 0; i < array.Length; i++)
+            {
+                string t = array[i].ToString();
+                if (t.Contains(key.ToString()))
+                {
+                    resultValuesList.Add(Convert.ToInt32(t));
+                }
+            }
+
+            return resultValuesList.ToArray();
+        }
+        #endregion
     }
 }

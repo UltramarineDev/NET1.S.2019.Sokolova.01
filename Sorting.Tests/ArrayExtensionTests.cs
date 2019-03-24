@@ -107,10 +107,10 @@
         #region Tests for NET.S.2019.Sokolova.02 - task 3
 
         [TestCase(new double[] { -0.02, 3.42, 0.26, 0.98, 3.06, 0.6 }, ExpectedResult = 3)]
-        [TestCase(new double[] { 0.462, 0.334, 0.67, 0.1, 0.098, -0.002, 0.6}, ExpectedResult = 2)]
+        [TestCase(new double[] { 0.462, 0.334, 0.67, 0.1, 0.098, -0.002, 0.6 }, ExpectedResult = 2)]
         [TestCase(new double[] { 1.0001, 1.0002, -3.0003, 1, 0.0003, 8.9, -0.0003, 0.901 }, ExpectedResult = null)]
         [TestCase(new double[] { 0.0001, 1.0002, -0.0003, 1, 0.0003, 1, -0.0003 }, ExpectedResult = 3)]
-        [TestCase(new double[] {0.657, 9.23, 1.0, 8.333, 0, -10.2, 0.4 }, ExpectedResult = null)]
+        [TestCase(new double[] { 0.657, 9.23, 1.0, 8.333, 0, -10.2, 0.4 }, ExpectedResult = null)]
         public int? FindIndexTests(double[] array)
             => ArrayExtension.FindIndex(array);
 
@@ -124,6 +124,33 @@
         public void FindIndex_ArrayIsNull_ThrowArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() => ArrayExtension.FindIndex(null));
+        }
+        #endregion
+        #region Tests for NET.S.2019.Sokolova.02 - task 4
+        [TestCase(new int[] { 7, 1, 2, 3, 4, 5, 6, 7, 68, 69, 70, 15, 17 }, 7, ExpectedResult = new int[] { 7, 7, 70, 17 })]
+        [TestCase(new int[] { -678, 7, 3, 9, 1, 9, -56 }, 0, ExpectedResult = new int[] { })]
+        [TestCase(new int[] { 3, 315, 9, 0, 45, 0, 32, -98, -535 }, 3, ExpectedResult = new int[] { 3, 315, 32, -535 })]
+        [TestCase(new int[] { 14, 64, 98, 0, -3, 87, 43, 64, 99, 52, 87 }, 4, ExpectedResult = new int[] { 14, 64, 43, 64 })]
+        [TestCase(new int[] { 6, 76, 87, 09, -546, 6, 76, 0, 0, 3 }, 1, ExpectedResult = new int[] { })]
+        public int[] FilterArrayByKeyTests(int[] array, int key)
+            => ArrayExtension.FilterArrayByKey(array, key);
+
+        [Test]
+        public void FilterArrayByKey_EmptyArray_ThrowArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => ArrayExtension.FilterArrayByKey(new int[] { }, 8));
+        }
+
+        [Test]
+        public void FilterArrayByKey_ArrayIsNull_ThrowArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => ArrayExtension.FindIndex(null));
+        }
+
+        [Test]
+        public void FilterArrayByKey_KeyNotADigit_ThrowArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => ArrayExtension.FilterArrayByKey(new int[] { 4, 7, 1, }, 10));
         }
         #endregion
     }
