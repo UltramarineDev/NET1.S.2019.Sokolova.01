@@ -8,7 +8,7 @@ namespace Sorting
     /// </summary>
     public static class ArrayExtension
     {
-        #region Sorting algorithms
+        #region NET.S.2019.Sokolova.01 - task 1
         /// <summary>
         /// generate random number
         /// </summary>
