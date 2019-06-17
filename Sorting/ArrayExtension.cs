@@ -188,19 +188,37 @@ namespace Sorting
             {
                 throw new ArgumentException("Source array can not be empty.", nameof(array));
             }
-
+            
             return FindMaxElementHelp(array);
         }
 
-        private static int FindMaxElementHelp(int[] array, int index = 0)
+        private static int FindMaxElementHelp(int[] array)
+        {
+            if (array.Length <= 10000)
+            {
+                return FindMax(array);
+            }
+
+            int leftSize = array.Length / 2;
+            int rightSize = array.Length - leftSize;
+            int[] left = new int[leftSize];
+            int[] right = new int[rightSize];
+            Array.Copy(array, 0, left, 0, leftSize);
+            Array.Copy(array, leftSize, right, 0, rightSize);
+
+            return Math.Max(FindMaxElementHelp(left),FindMaxElementHelp(right));
+        }
+
+        private static int FindMax(int[] array, int index = 0)
         {
             if (index == array.Length)
             {
                 return array[0];
             }
 
-            return Math.Max(array[index], FindMaxElementHelp(array, index + 1));
+            return Math.Max(array[index], FindMax(array, index + 1));
         }
+
         #endregion
         #region NET.S.2019.Sokolova.02 - task 3
         /// <summary>
@@ -270,7 +288,7 @@ namespace Sorting
 
             if (key > 9 || key < 0)
             {
-                throw new ArgumentException(" Input number is not a digit.", nameof(key));
+                throw new ArgumentException("Input number is not a digit.", nameof(key));
             }
 
             List<int> resultValuesList = new List<int>();

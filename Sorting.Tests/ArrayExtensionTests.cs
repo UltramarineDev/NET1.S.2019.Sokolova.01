@@ -1,6 +1,8 @@
 ﻿namespace Sorting.Tests
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using NUnit.Framework;
 
     /// <summary>
@@ -56,14 +58,11 @@
         [Test]
         public void QuickSortMethod_LargeArray_SortAscending()
         {
-            // Arrange
             int[] array = RandomArrayGenerating.GenerateArray(1000);
 
-            // Act
             int[] actual = ArrayExtension.QuickSort(array);
             bool result = SortedArrayChecker.CheckSortedArray(array);
 
-            // Assert
             Assert.IsTrue(result);
         }
 
@@ -73,14 +72,11 @@
         [Test]
         public void MergeSortMethod_LargeArray_SortAscending()
         {
-            // Arrange
             int[] array = RandomArrayGenerating.GenerateArray(1000);
 
-            // Act
             int[] actual = ArrayExtension.MergeSort(array);
             bool result = SortedArrayChecker.CheckSortedArray(array);
 
-            // Assert
             Assert.IsTrue(result);
         }
         #endregion
@@ -103,8 +99,32 @@
         {
             Assert.Throws<ArgumentNullException>(() => ArrayExtension.FindMaxElement(null));
         }
+
+        [Test]
+        public void FindMaxElement_ArrayWith1000Elements_MaxElement()
+        {
+            int[] array = RandomArrayGenerating.GenerateArray(1000);
+            int actual = ArrayExtension.FindMaxElement(array);
+
+            int expected = array.Max();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void FindMaxElement_ArrayWith1000000Elements_MaxElement()
+        {
+            int[] array = RandomArrayGenerating.GenerateArray(1000000);
+
+            int actual = ArrayExtension.FindMaxElement(array);
+
+            int expected = array.Max();
+
+            Assert.AreEqual(expected, actual);
+        }
+
         #endregion
-        #region Tests for NET.S.2019.Sokolova.02 - task 3
+            #region Tests for NET.S.2019.Sokolova.02 - task 3
 
         [TestCase(new double[] { -0.02, 3.42, 0.26, 0.98, 3.06, 0.6 }, ExpectedResult = 3)]
         [TestCase(new double[] { 0.462, 0.334, 0.67, 0.1, 0.098, -0.002, 0.6 }, ExpectedResult = 2)]
@@ -125,6 +145,7 @@
         {
             Assert.Throws<ArgumentNullException>(() => ArrayExtension.FindIndex(null));
         }
+
         #endregion
         #region Tests for NET.S.2019.Sokolova.02 - task 4
         [TestCase(new int[] { 7, 1, 2, 3, 4, 5, 6, 7, 68, 69, 70, 15, 17 }, 7, ExpectedResult = new int[] { 7, 7, 70, 17 })]
