@@ -124,7 +124,7 @@
         }
 
         #endregion
-            #region Tests for NET.S.2019.Sokolova.02 - task 3
+        #region Tests for NET.S.2019.Sokolova.02 - task 3
 
         [TestCase(new double[] { -0.02, 3.42, 0.26, 0.98, 3.06, 0.6 }, ExpectedResult = 3)]
         [TestCase(new double[] { 0.462, 0.334, 0.67, 0.1, 0.098, -0.002, 0.6 }, ExpectedResult = 2)]
@@ -173,6 +173,49 @@
         {
             Assert.Throws<ArgumentException>(() => ArrayExtension.FilterArrayByKey(new int[] { 4, 7, 1, }, 10));
         }
+
+        [Test]
+        public void FilterArrayByKey_ArrayWith1000Elements_()
+        {
+            int[] array = RandomArrayGenerating.GenerateArray(1000);
+            int key = 0;
+
+            int[] actual = ArrayExtension.FilterArrayByKey(array, 0);
+            
+            List<int> expected = new List<int>();
+            for (int i = 0; i < array.Length; i++)
+            {
+                string t = array[i].ToString();
+                if (t.Contains(key.ToString()))
+                {
+                    expected.Add(Convert.ToInt32(t));
+                }
+            }
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void FilterArrayByKey_ArrayWith1000000Elements_()
+        {
+            int[] array = RandomArrayGenerating.GenerateArray(1000000);
+            int key = 3;
+
+            int[] actual = ArrayExtension.FilterArrayByKey(array, 3);
+
+            List<int> expected = new List<int>();
+            for (int i = 0; i < array.Length; i++)
+            {
+                string t = array[i].ToString();
+                if (t.Contains(key.ToString()))
+                {
+                    expected.Add(Convert.ToInt32(t));
+                }
+            }
+
+            Assert.AreEqual(expected, actual);
+        }
+
         #endregion
     }
 }
