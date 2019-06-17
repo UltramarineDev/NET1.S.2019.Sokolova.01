@@ -188,7 +188,7 @@ namespace Sorting
             {
                 throw new ArgumentException("Source array can not be empty.", nameof(array));
             }
-            
+
             return FindMaxElementHelp(array);
         }
 
@@ -206,7 +206,7 @@ namespace Sorting
             Array.Copy(array, 0, left, 0, leftSize);
             Array.Copy(array, leftSize, right, 0, rightSize);
 
-            return Math.Max(FindMaxElementHelp(left),FindMaxElementHelp(right));
+            return Math.Max(FindMaxElementHelp(left), FindMaxElementHelp(right));
         }
 
         private static int FindMax(int[] array, int index = 0)
@@ -294,14 +294,31 @@ namespace Sorting
             List<int> resultValuesList = new List<int>();
             for (int i = 0; i < array.Length; i++)
             {
-                string t = array[i].ToString();
-                if (t.Contains(key.ToString()))
+                if (IsDigitInNumber(array[i], key))
                 {
-                    resultValuesList.Add(Convert.ToInt32(t));
+                    resultValuesList.Add(array[i]);
                 }
             }
 
             return resultValuesList.ToArray();
+        }
+
+        private static bool IsDigitInNumber(int number, int key)
+        {
+            if (number < 0)
+                number = -number;
+
+            while (number > 0)
+            {
+                if (number % 10 == key)
+                {
+                    return true;
+                }
+
+                number /= 10;
+            }
+
+            return false;
         }
         #endregion
     }
