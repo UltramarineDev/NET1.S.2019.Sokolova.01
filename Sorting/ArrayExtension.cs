@@ -112,13 +112,13 @@ namespace Sorting
         /// <param name="items">array of integers</param>
         /// <param name="left">left item</param>
         /// <param name="right">right item</param>
-        private static void Swap(int[] items, int left, int right)
+        private static void Swap(ref int left, ref int right)
         {
             if (left != right)
             {
-                int temp = items[left];
-                items[left] = items[right];
-                items[right] = temp;
+                int temp = left;
+                left = right;
+                right = temp;
             }
         }
 
@@ -152,7 +152,7 @@ namespace Sorting
         {
             int pivotValue = items[pivotIndex];
 
-            Swap(items, pivotIndex, right);
+            Swap(ref pivotIndex, ref right);
 
             int storeIndex = left;
 
@@ -160,12 +160,12 @@ namespace Sorting
             {
                 if (items[i].CompareTo(pivotValue) < 0)
                 {
-                    Swap(items, i, storeIndex);
+                    Swap(ref i, ref storeIndex);
                     storeIndex += 1;
                 }
             }
 
-            Swap(items, storeIndex, right);
+            Swap(ref storeIndex, ref right);
             return storeIndex;
         }
         #endregion
